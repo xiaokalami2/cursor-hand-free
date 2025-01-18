@@ -25,9 +25,12 @@ class EmailVerificationHandler:
         except Exception as e:
             print(f"获取验证码失败: {str(e)}")
 
+        if code is None:
+            code = input("自动获取验证码失败，请手动输入验证码: ")
+
         return code
 
-    # 手动输入验证码
+    # 获取最新邮件中的验证码
     def _get_latest_mail_code(self):
         # 获取邮件列表
         mail_list_url = f"https://tempmail.plus/api/mails?email={self.username}{self.emailExtension}&limit=20&epin="
